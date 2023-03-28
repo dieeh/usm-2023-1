@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-//#include <sys/stat.h>
+#include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
 #include <dirent.h> 
@@ -25,7 +25,7 @@ int main(){
     const unsigned MAX_LENGTH = 256;
     char buffer[MAX_LENGTH];
     char pathTemp[MAX_LENGTH];
-    int k = 0, found;
+    int k = 0;
     for (int i = 0; i < fileQuantity; i++){
         strcpy(pathTemp, "./Archivos_Prueba/");
         strcat(pathTemp ,fileNames[i]);
@@ -33,23 +33,23 @@ int main(){
         fgets(buffer, MAX_LENGTH, fp);
         fgets(buffer, MAX_LENGTH, fp);
         fgets(buffer, MAX_LENGTH, fp);
-        for (int j = 0; j < k; j++){
-            if (strcmp(fileCategory[j], buffer) == 0){
-                found = 1;  // Set flag to indicate category was found
+        int j;
+        for (j = 0; j < k; j++){
+            if (strcmp(fileCategory[j],buffer) == 0){
                 break;
             }
         }
-        if (!found){  // Check flag to see if category was not found
-            sprintf(fileCategory[k++], "%s", buffer);
+        if (j == k){
+            sprintf(fileCategory[k++],"%s", buffer);
         }
-
+        fclose(fp);
     }
     char Categories[k][MAX_LENGTH];
-    int count = 0, is_duplicate, j;
+    int count = 0, is_duplicate;
     for(int i = 0; i < k; i++) {
         is_duplicate = 0;
-        for(j = i + 1; j < k; j++) {
-            if(strcmp(fileCategory[i], fileCategory[j]) == 0) {
+        for(int j = i + 1; j < k; j++) {
+            if(strcmp(fileCategory[j], fileCategory[i]) == 0) {
                 is_duplicate = 1;
                 break;
             }
@@ -60,12 +60,28 @@ int main(){
         }
     }
     
-    for (int i = 0; i < k; i++)
-    {
-        puts(Categories[i]);
+    char genre[MAX_LENGTH];
+    for (int i = 0; i < k; i++){
+        strcpy(genre, Categories[i]);
+        mkdir(genre, 0777);
+        strcat(genre,"/Menor_a_40000");
+        mkdir(genre, 0777);
+        strcpy(genre, Categories[i]);
+        strcat(genre,"/Entre_40000_y_80000");
+        mkdir(genre, 0777);
+        strcpy(genre, Categories[i]);
+        strcat(genre,"/Mayor_a_80000");
+        mkdir(genre, 0777);
     }
-    
+
+    int Actual_Mayor;
+    printf("¿Desea ordenar por cantidad actual o mayor cantidad de jugadores?\n");
+    printf("\t1.- Cantidad actual\n");
+    printf("\t2.- Mayor cantidad\n");
+    scanf("%d", &Actual_Mayor);
+
     
 
+    
     return 0;
 }
