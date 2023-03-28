@@ -1,5 +1,6 @@
 #include <stdio.h>
-#include <sys/stat.h>
+#include <stdlib.h>
+//#include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
 #include <dirent.h> 
@@ -12,17 +13,19 @@ int main(){
     char fileNames[100][100];
     d = opendir("./Archivos_Prueba");
     if (d) {
-        while ((dir = readdir(d)) != NULL) {
-            sprintf(fileNames[fileQuantity++],"%s", dir->d_name);
+    while ((dir = readdir(d)) != NULL) {
+        if (strcmp(dir->d_name, ".") != 0 && strcmp(dir->d_name, "..") != 0 && dir->d_type == DT_REG) {
+            sprintf(fileNames[fileQuantity++], "%s", dir->d_name);
+            }
         }
-        closedir(d);
+    closedir(d);
     }
     char fileCategory[fileQuantity][100];
     FILE *fp;
     const unsigned MAX_LENGTH = 256;
     char buffer[MAX_LENGTH];
     char pathTemp[MAX_LENGTH];
-    int k = 0, j = 0;
+    int k = 0, found;
     for (int i = 0; i < fileQuantity; i++){
         strcpy(pathTemp, "./Archivos_Prueba/");
         strcat(pathTemp ,fileNames[i]);
@@ -30,19 +33,36 @@ int main(){
         fgets(buffer, MAX_LENGTH, fp);
         fgets(buffer, MAX_LENGTH, fp);
         fgets(buffer, MAX_LENGTH, fp);
-        for (int j; j < fileQuantity; j++){
-            if (strcmp(fileCategory[j],buffer) == 0){
-                break;
-            }else{
-                sprintf(fileCategory[k++],"%s", buffer);
+        for (int j = 0; j < k; j++){
+            if (strcmp(fileCategory[j], buffer) == 0){
+                found = 1;  // Set flag to indicate category was found
                 break;
             }
+        }
+        if (!found){  // Check flag to see if category was not found
+            sprintf(fileCategory[k++], "%s", buffer);
+        }
+
+    }
+    char Categories[k][MAX_LENGTH];
+    int count = 0, is_duplicate, j;
+    for(int i = 0; i < k; i++) {
+        is_duplicate = 0;
+        for(j = i + 1; j < k; j++) {
+            if(strcmp(fileCategory[i], fileCategory[j]) == 0) {
+                is_duplicate = 1;
+                break;
+            }
+        }
+        if(is_duplicate == 0) {
+            strcpy(Categories[count], fileCategory[i]);
+            count++;
         }
     }
     
     for (int i = 0; i < k; i++)
     {
-        puts(fileCategory[i]);
+        puts(Categories[i]);
     }
     
     
