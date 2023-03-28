@@ -22,7 +22,7 @@ int main(){
     const unsigned MAX_LENGTH = 256;
     char buffer[MAX_LENGTH];
     char pathTemp[MAX_LENGTH];
-    int k = 0;
+    int k = 0, j = 0;
     for (int i = 0; i < fileQuantity; i++){
         strcpy(pathTemp, "./Archivos_Prueba/");
         strcat(pathTemp ,fileNames[i]);
@@ -30,11 +30,12 @@ int main(){
         fgets(buffer, MAX_LENGTH, fp);
         fgets(buffer, MAX_LENGTH, fp);
         fgets(buffer, MAX_LENGTH, fp);
-        for (int j = 0; j < fileQuantity; j++){
+        for (int j; j < fileQuantity; j++){
             if (strcmp(fileCategory[j],buffer) == 0){
                 break;
             }else{
                 sprintf(fileCategory[k++],"%s", buffer);
+                break;
             }
         }
     }
