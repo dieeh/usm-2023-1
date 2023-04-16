@@ -80,8 +80,35 @@ int main(){
     printf("\t2.- Mayor cantidad\n");
     scanf("%d", &Actual_Mayor);
 
-    
-
+    char temp[MAX_LENGTH];
+    int result = 0;
+    for (int i = 0; i < fileQuantity; i++){
+        strcpy(pathTemp, "./Archivos_Prueba/");
+        strcat(pathTemp ,fileNames[i]);
+        fp = fopen(pathTemp, "r");
+        if (Actual_Mayor == 1){
+            fgets(temp, MAX_LENGTH, fp);
+            fgets(buffer, MAX_LENGTH, fp);
+            fgets(buffer, MAX_LENGTH, fp);
+        }else{
+            fgets(temp, MAX_LENGTH, fp);
+            fgets(temp, MAX_LENGTH, fp);
+            fgets(buffer, MAX_LENGTH, fp);
+        }
+        
+        char destPath[MAX_LENGTH];
+        int numerito = atoi(temp);
+        if (numerito < 40000){
+            sprintf(destPath, "./%s/Menor_a_40000/%s", buffer, fileNames[i]);
+            result = rename(pathTemp, destPath);
+        } else if (numerito > 80000){
+            sprintf(destPath, "./%s/Mayor_a_80000/%s", buffer, fileNames[i]);
+            result = rename(pathTemp, destPath);
+        } else{
+            sprintf(destPath, "./%s/Entre_40000_y_80000/%s", buffer, fileNames[i]);
+            result = rename(pathTemp, destPath);
+        }
+    }
     
     return 0;
 }
