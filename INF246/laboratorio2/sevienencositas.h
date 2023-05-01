@@ -1,4 +1,0 @@
-struct carta
-{
-    int numero;
-};
