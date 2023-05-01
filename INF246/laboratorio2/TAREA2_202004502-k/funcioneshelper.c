@@ -1,4 +1,4 @@
-#include "sevienencositas.h"
+#include "funcioneshelper.h"
 
 /**
  * void shuffle(carta *array, size_t n)
@@ -78,4 +78,10 @@ carta peek(mazo *s)
         exit(EXIT_FAILURE);
     }
     return s->data[s->top];
+}
+
+// Funcion para transformar el stack a un array normal
+carta *transfer(mazo *s)
+{
+    return s->data;
 }

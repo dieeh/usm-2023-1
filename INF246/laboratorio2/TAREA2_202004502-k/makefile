@@ -1,5 +1,5 @@
 main: 
-	gcc toma6.c sevienencositas.c -Wall -Wextra -o juego_toma6
+	gcc toma6.c funcioneshelper.c -Wall -Wextra -o juego_toma6
 
 run: juego_toma6
 	./juego_toma6

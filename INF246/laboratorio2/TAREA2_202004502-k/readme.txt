@@ -5,7 +5,7 @@ Integrantes:
 El archivo toma6.c es el que contiene el codigo principal del juego que 
 se pide en la tarea.
 
-Los archivos sevienencositas.c y sevienencositas.h son los que contienen structs y funciones 
+Los archivos funcioneshelper.c y funcioneshelper.h son los que contienen structs y funciones 
 extra que se usan en el codigo principal
 
 Para ejecutar el programa, hay que posicionar la terminal en el directorio donde se

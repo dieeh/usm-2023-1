@@ -1,5 +1,5 @@
-#ifndef sevienencositas_H
-#define sevienencositas_H
+#ifndef funcioneshelper_H
+#define funcioneshelper_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -32,25 +32,28 @@ typedef struct mazo
  */
 void shuffle(carta *array, size_t n);
 
-// Funcion para inicializar el mazo
+// Funcion para inicializar el mazo, notese que el mazo es un stack.
 void init_mazo(mazo *s);
 
-// Funcion para chequear si el mazo está vacío
+// Funcion para chequear si el mazo está vacío.
 bool is_empty(mazo *s);
 
-// Funcion para chequear si el mazo está lleno
+// Funcion para chequear si el mazo está lleno.
 bool is_full(mazo *s);
 
-// Funcion para chequear cuantos elementos hay en el mazo
+// Funcion para chequear cuantos elementos hay en el mazo.
 int how_many(mazo *s);
 
-// Funcion para meter un item al mazo
+// Funcion para meter un item al mazo.
 void push(mazo *s, carta c);
 
-// Funcion para sacar un item del mazo
+// Funcion para sacar un item del mazo.
 carta pop(mazo *s);
 
-// Funcion para ver el último elemento del mazo
+// Funcion para ver el último elemento del mazo.
 carta peek(mazo *s);
+
+// Funcion para transformar el stack a un array normal.
+carta *transfer(mazo *s);
 
 #endif
