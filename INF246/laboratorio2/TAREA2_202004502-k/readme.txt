@@ -11,3 +11,6 @@ extra que se usan en el codigo principal
 Para ejecutar el programa, hay que posicionar la terminal en el directorio donde se
 encuentre el archivo makefile, luego escribir en la terminal el comando 'make',
 que compilará el archivo, para ejecutarlo se escribir 'make run'
+
+
+Igual no va a funcionar pq no está terminado xdn't

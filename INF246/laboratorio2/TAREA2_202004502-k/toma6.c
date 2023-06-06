@@ -103,7 +103,7 @@ int main(int argc, char const *argv[])
             return 1;
         }
     }
-    int identificador = 0;
+    int identificador = 1;
     for (int i = 0; i < players; i++)
     {
         pid = fork();
@@ -119,22 +119,46 @@ int main(int argc, char const *argv[])
         }
     }
 
-    if (pid != 0)
+    for (int i = 0; i < rondas; i++)
     {
-        for (int i = 0; i < players; i++)
+
+        if (pid != 0)
         {
-            close(pipePH[i][0]);
-            close(pipeHP[i][1]);
+            for (int i = 0; i < players; i++)
+            {
+                close(pipePH[i][0]);
+                close(pipeHP[i][1]);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < players; i++)
+            {
+                close(pipePH[i][1]);
+                close(pipeHP[i][0]);
+            }
+            switch (identificador)
+            {
+            case 1:
+                /* code */
+                break;
+            case 2:
+                /* code */
+                break;
+            case 3:
+                /* code */
+                break;
+            case 4:
+                /* code */
+                break;
+
+            default:
+                break;
+            }
         }
     }
-    else
-    {
-        for (int i = 0; i < players; i++)
-        {
-            close(pipePH[i][1]);
-            close(pipeHP[i][0]);
-        }
-    }
+
+    //  son las 6:14 ya no lo terminé jajan't :(
 
     return 0;
 }
